@@ -365,32 +365,44 @@ philo_bonus/
 
 ### Challenge 1: Deadlock
 **Problem**: All philosophers take left fork, wait for right fork forever
-**Solution**: Odd-numbered philosophers start with delay, ensuring eating pattern
+**Solution (Mandatory)**: Odd-numbered philosophers start with delay, ensuring eating pattern
+**Solution (Bonus)**: Single shared semaphore limits concurrent eaters, prevents circular wait
 
 ### Challenge 2: Race Conditions
-**Problem**: Multiple threads modifying shared state simultaneously
-**Solution**: All shared data protected by mutexes (forks, status, timestamps)
+**Problem**: Multiple threads/processes modifying shared state simultaneously
+**Solution (Mandatory)**: All shared data protected by mutexes (forks, status, timestamps)
+**Solution (Bonus)**: Named semaphores protect critical sections, process isolation provides additional safety
 
 ### Challenge 3: Starvation
 **Problem**: Some philosophers never get to eat
-**Solution**: Fair mutex implementation + death monitoring ensures constant eating cycles
+**Solution (Mandatory)**: Fair mutex implementation + death monitoring ensures constant eating cycles
+**Solution (Bonus)**: Shared fork semaphore guarantees fair access across all philosophers
 
 ### Challenge 4: Accurate Timing
-**Problem**: Precise millisecond tracking with threads is difficult
-**Solution**: Monitor thread frequently checks death times, optimal check frequency
+**Problem**: Precise millisecond tracking with threads/processes is difficult
+**Solution (Mandatory)**: Monitor thread frequently checks death times with precise timing
+**Solution (Bonus)**: Each process independently tracks meal times, monitor process coordinates
 
 ### Challenge 5: Single Philosopher Edge Case
-**Problem**: Special handling required
-**Solution**: Detected and handled separately with instant death
+**Problem**: Special handling required (would deadlock without special case)
+**Solution (Both)**: Detected and handled separately with immediate death detection
+
+### Challenge 6: Process/Thread Synchronization (Bonus Only)
+**Problem**: Processes can't directly share memory like threads
+**Solution**: Named semaphores (kernel-managed IPC) enable cross-process coordination
 
 ## 🎯 Learning Outcomes
 
-✅ Deep understanding of threading and concurrency
-✅ Mutex and synchronization primitives
+✅ Deep understanding of threading and concurrency (mandatory)
+✅ Process management with fork() and exit() (bonus)
+✅ Mutex synchronization primitives and deadlock prevention
+✅ POSIX semaphores and named semaphores for IPC (bonus)
 ✅ Race condition detection and prevention
 ✅ Deadlock analysis and solutions
-✅ Real-time system design
-✅ POSIX threads (pthread) API
+✅ Real-time system design with accurate timing
+✅ POSIX threads (pthread) API (mandatory)
+✅ IPC concepts and inter-process communication (bonus)
+✅ System resource management and cleanup (both)
 
 ## 👤 Author
 
@@ -398,4 +410,4 @@ philo_bonus/
 
 ---
 
-**GitHub Description**: Multithreaded Dining Philosophers Problem implementation with deadlock prevention using POSIX threads and mutexes.
+**GitHub Description**: Multithreaded Dining Philosophers Problem with deadlock prevention. Mandatory: POSIX threads + mutexes. Bonus: processes + semaphores for IPC.
